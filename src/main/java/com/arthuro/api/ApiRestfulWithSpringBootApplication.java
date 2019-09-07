@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Bean;
 
 import com.arthuro.api.entities.Company;
 import com.arthuro.api.repositories.CompanyRepository;
+import com.arthuro.api.services.ExampleService;
 import com.arthuro.api.utils.PassUtils;
 
 @SpringBootApplication
@@ -21,6 +22,10 @@ public class ApiRestfulWithSpringBootApplication {
 	
 	@Autowired
 	private CompanyRepository companyRepository;
+
+	@Autowired
+	private ExampleService exampleService;
+
 	
 	public static void main(String[] args) {
 		SpringApplication.run(ApiRestfulWithSpringBootApplication.class, args);
@@ -31,13 +36,13 @@ public class ApiRestfulWithSpringBootApplication {
 		return args -> {
 			System.out.println("### Quantidade de elementos por pagina = " + this.qtdPorPagina);
 			
-			String passEncoded = PassUtils.generate("123456");
-			System.out.println("pass encoded: " + passEncoded);
+			//String passEncoded = PassUtils.generate("123456");
+			//System.out.println("pass encoded: " + passEncoded);
 			
-			passEncoded = PassUtils.generate("123456");
-			System.out.println("pass encoded again: " + passEncoded);
+			//passEncoded = PassUtils.generate("123456");
+			//System.out.println("pass encoded again: " + passEncoded);
 			
-			System.out.println("pass valid: " + PassUtils.passValid("123456", passEncoded));
+			//System.out.println("pass valid: " + PassUtils.passValid("123456", passEncoded));
 			
 			
 			Company company = new Company();
@@ -47,11 +52,15 @@ public class ApiRestfulWithSpringBootApplication {
 			
 			List<Company> companies = this.companyRepository.findAll();
 			companies.forEach(System.out::println);
-			
+			System.out.println(1);
 			Company companyDB = companyRepository.findByCode("745645454");
+			System.out.println(2);
 			System.out.println("empresa :" + companyDB.toString());
 			companyDB.setCode("6554648546");
+			System.out.println(3);
+			companyDB.setEmployes(null);
 			this.companyRepository.save(companyDB);
+			System.out.println(4);
 			
 			Company companyCNPJ = companyRepository.findByCode("6554648546");
 			System.out.println("empresa :" + companyCNPJ.toString());
@@ -65,7 +74,7 @@ public class ApiRestfulWithSpringBootApplication {
 			companies = this.companyRepository.findAll();
 			System.out.println(companies.size());
 
-			
+			exampleService.testingService();
 			
 		};
 	}

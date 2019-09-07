@@ -37,12 +37,12 @@ public class Employer implements Serializable{
 	private String email;
 	private String pass;
 	private String code;
-	private BigDecimal hourValue;
-	private Float hourWorked;
-	private Float hourLunch;
+	private BigDecimal hour_value;
+	private BigDecimal hour_worked;
+	private BigDecimal hour_lunch;
 	private ProfileEnum profile;
-	private Date dateCreated;
-	private Date dateUpdated;
+	private Date date_created;
+	private Date date_updated;
 	private Company company;
 	private List<Register> registers;
 	
@@ -95,31 +95,31 @@ public class Employer implements Serializable{
 		this.code = code;
 	}
 
-	@Column(name="hourValue", nullable=true)
+	@Column(name="hour_value", nullable=true)
 	public BigDecimal getHourValue() {
-		return hourValue;
+		return hour_value;
 	}
 
 	public void setHourValue(BigDecimal hourValue) {
-		this.hourValue = hourValue;
+		this.hour_value = hourValue;
 	}
 
-	@Column(name="hourWorked", nullable=true)
-	public Float getHourWorked() {
-		return hourWorked;
+	@Column(name="hour_worked", nullable=true)
+	public BigDecimal getHourWorked() {
+		return hour_worked;
 	}
 
-	public void setHourWorked(Float hourWorked) {
-		this.hourWorked = hourWorked;
+	public void setHourWorked(BigDecimal hourWorked) {
+		this.hour_worked = hourWorked;
 	}
 
-	@Column(name="hourLunch", nullable=true)
-	public Float getHourLunch() {
-		return hourLunch;
+	@Column(name="hour_lunch", nullable=true)
+	public BigDecimal getHourLunch() {
+		return hour_lunch;
 	}
 
-	public void setHourLunch(Float hourLunch) {
-		this.hourLunch = hourLunch;
+	public void setHourLunch(BigDecimal hourLunch) {
+		this.hour_lunch = hourLunch;
 	}
 
 	@Enumerated(EnumType.STRING)
@@ -132,22 +132,22 @@ public class Employer implements Serializable{
 		this.profile = profile;
 	}
 
-	@Column(name="dateCreated", nullable=false)
+	@Column(name="date_created", nullable=false)
 	public Date getDateCreated() {
-		return dateCreated;
+		return date_created;
 	}
 
 	public void setDateCreated(Date dateCreated) {
-		this.dateCreated = dateCreated;
+		this.date_created = dateCreated;
 	}
 
-	@Column(name="dateUpdated", nullable=false)
+	@Column(name="date_updated", nullable=false)
 	public Date getDateUpdated() {
-		return dateUpdated;
+		return date_updated;
 	}
 
 	public void setDateUpdated(Date dateUpdated) {
-		this.dateUpdated = dateUpdated;
+		this.date_updated = dateUpdated;
 	}
 
 	@ManyToOne(fetch=FetchType.EAGER)
@@ -170,21 +170,21 @@ public class Employer implements Serializable{
 
 	@PreUpdate
 	public void preUpdate() {
-		dateUpdated = new Date();
+		date_updated = new Date();
 	}
 	
 	@PrePersist
 	public void prePersist() {
 		final Date actual = new Date();
-		dateCreated = actual;
-		dateUpdated = actual;
+		date_created = actual;
+		date_updated = actual;
 	}
 
 	@Override
 	public String toString() {
 		return "Employer [id=" + id + ", name=" + name + ", email=" + email + ", pass=" + pass + ", code=" + code
-				+ ", hourValue=" + hourValue + ", hourWorked=" + hourWorked + ", hourLunch=" + hourLunch + ", profile="
-				+ profile + ", dateCreated=" + dateCreated + ", dateUpdated=" + dateUpdated + "]";
+				+ ", hourValue=" + hour_value + ", hourWorked=" + hour_worked + ", hourLunch=" + hour_lunch + ", profile="
+				+ profile + ", dateCreated=" + date_created + ", dateUpdated=" + date_updated + "]";
 	}	
 	
 }
